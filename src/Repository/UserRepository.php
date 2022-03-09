@@ -21,6 +21,29 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function filterByEmail($email){
+        return $this->createQueryBuilder('u')
+        ->select('u')
+        ->andWhere('u.email = :email')
+        ->setParameter('email', $email)
+        ->getQuery()
+        ->getArrayResult();        
+    }
+
+    public function consultaMiguel($id){
+        return $this->createQueryBuilder('u')
+        ->select('u')
+        ->andWhere('u.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getArrayResult();
+    }
+    public function getUsers() {
+        return $this->createQueryBuilder('u')
+        ->select('u')
+        ->getQuery()
+        ->getArrayResult();
+    }
     /**
      * @throws ORMException
      * @throws OptimisticLockException
