@@ -17,65 +17,60 @@ class ApiController extends AbstractController
 {
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository){
-        $this->userRepository = $userRepository;
-    } 
-    /**
-     * @Route("/getAllUsers", name="api.v1.calculator.sum")
-     */
-    public function getAllUsersAction(Request $request): Response
+    public function __construct(UserRepository $userRepository)
     {
-        return $this->json(['user' => $this->userRepository->getUsers()]);
+        $this->userRepository = $userRepository;
     }
 
-    /**
-     * @Route("/emma/{id}", name="api.v1.test", methods={"GET"})
-     */
-    public function getEmma($id){
-        return $this->json(['hija' => 'Emma', 'id' => $id]);
-    }
 
-    //--------------------------PETICIÓN GET PASANDOLA POR LA URL-------------------------
+    //     /**
+    //      * @Route("/emma/{id}", name="api.v1.test", methods={"GET"})
+    //      */
+    //     public function getEmma($id){
+    //         return $this->json(['hija' => 'Emma', 'id' => $id]);
+    //     }
 
- /**
-     * @Route("/getSuma/{number1}/{number2}", name="api.v1.calculate", methods={"GET"})
-     */
-    public function getSuma($number1, $number2){
-        return $this->json(['sum' => $number1 + $number2]);
-    }
+    //     //--------------------------PETICIÓN GET PASANDOLA POR LA URL-------------------------
 
-    //--------------------PETICIÓN POST PASANDOLA POR BODY DE LA PETICIÓN (THUNDER)---------------
+    //  /**
+    //      * @Route("/getSuma/{number1}/{number2}", name="api.v1.calculate", methods={"GET"})
+    //      */
+    //     public function getSuma($number1, $number2){
+    //         return $this->json(['sum' => $number1 + $number2]);
+    //     }
 
-     /**
-     * @Route("/getSuma", name="api.v1.calculate.body", methods={"POST"})
-     */
-    public function getSumaPost(Request $request){
-        $number1 = $request->get('number1');
-        $number2 = $request->get('number2');
+    //     //--------------------PETICIÓN POST PASANDOLA POR BODY DE LA PETICIÓN (THUNDER)---------------
 
-        return $this->json(['sum' => $number1 + $number2]);
-    }
+    //      /**
+    //      * @Route("/getSuma", name="api.v1.calculate.body", methods={"POST"})
+    //      */
+    //     public function getSumaPost(Request $request){
+    //         $number1 = $request->get('number1');
+    //         $number2 = $request->get('number2');
 
-    /**
-     * @Route("/user/{id}", name="api.v1.user.get", methods={"GET"})
-     */
-    public function getUserAction($id) {
-        $user = $this->userRepository->find($id);
-        $userVersionConsultaMiguel = $this->userRepository->consultaMiguel($id);
+    //         return $this->json(['sum' => $number1 + $number2]);
+    //     }
 
-        return $this->json(['user' => [
-            'name' => $user->getName(),
-            'email' => $user->getEmail()
-        ],'consultaMiguel' => $userVersionConsultaMiguel]);
-    } 
+    // /**
+    //  * @Route("/user/{id}", name="api.v1.user.get", methods={"GET"})
+    //  */
+    // public function getUserAction($id) {
+    //     $user = $this->userRepository->find($id);
+    //     $userVersionConsultaMiguel = $this->userRepository->consultaMiguel($id);
 
-    /**
-     * @Route("/user/email/{email}", name="api.v1.user.filter", methods={"GET"})
-     */
-    public function filterByNameAction($email) {
+    //     return $this->json(['user' => [
+    //         'name' => $user->getName(),
+    //         'email' => $user->getEmail()
+    //     ],'consultaMiguel' => $userVersionConsultaMiguel]);
+    // } 
 
-        $user = $this->userRepository->filterByEmail($email);
+    // /**
+    //  * @Route("/user/email/{email}", name="api.v1.user.filter", methods={"GET"})
+    //  */
+    // public function filterByNameAction($email) {
 
-        dump($user);die;
-    } 
+    //     $user = $this->userRepository->filterByEmail($email);
+
+    //     dump($user);die;
+    // } 
 }
